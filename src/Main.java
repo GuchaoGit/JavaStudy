@@ -1,41 +1,139 @@
 import bean.FreshJuice;
 import bean.Work;
+import utils.Util;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Main {
     private static boolean ready;
+
     public static void main(String[] args) {
         FreshJuice juice = new FreshJuice();
         juice.size = FreshJuice.FreshJuiceSize.LARGE;
-        testVolatile();
         testMath();
         testChar();
         testString();
+        testArray();
+        testDate();
+        testRegExp();
+        testVarargs();
+
+//        testVolatile();
+    }
+
+    private static void testVarargs() {
+        System.out.println("++++++++++++++++++++可变参数++++++++++++++++++++++++");
+        double max = Util.getMax(34, 25.4, 42, 98, 45);
+        System.out.println("最大值是" + max);
+    }
+
+    /**
+     * 正则表达式测试
+     */
+    private static void testRegExp() {
+        System.out.println("++++++++++++++++++++正则表达式++++++++++++++++++++++++");
+        // 按指定模式在字符串查找
+        String line = "This order was placed for QT3000! OK?";
+        String pattern = "(\\D*)(\\d+)(.*)";
+
+        // 创建 Pattern 对象
+        Pattern r = Pattern.compile(pattern);
+
+        // 现在创建 matcher 对象
+        Matcher m = r.matcher(line);
+        if (m.find()) {
+            System.out.println(m.groupCount());
+            System.out.println("Found value: " + m.group(0));
+            System.out.println("Found value: " + m.group(1));
+            System.out.println("Found value: " + m.group(2));
+            System.out.println("Found value: " + m.group(3));
+        } else {
+            System.out.println("NO MATCH");
+        }
+
+        String REGEX = "dog";
+        String INPUT = "The dog says meow. " +
+                "All dogs say meow.";
+        String REPLACE = "cat";
+        Pattern p = Pattern.compile(REGEX);
+        Matcher matcher = p.matcher(INPUT);
+        INPUT = matcher.replaceAll(REPLACE);
+        System.out.println(INPUT);
+
+
+    }
+
+    /**
+     * 日期测试
+     */
+    private static void testDate() {
+        System.out.println("++++++++++++++++++++日期测试++++++++++++++++++++++++");
+        Date date = new Date();
+        System.out.printf("%tc%n", date);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年第w周\nMM 月第W周");
+        String s = sdf.format(date);
+        System.out.println(s);
+        GregorianCalendar gregorianCalendar = new GregorianCalendar();
+        System.out.println(gregorianCalendar.isLeapYear(gregorianCalendar.get(Calendar.YEAR)));
+    }
+
+    /**
+     * 测试数组
+     */
+    private static void testArray() {
+        System.out.println("++++++++++++++++++++测试数组++++++++++++++++++++++++");
+        String[] fruits = new String[3];//指定大小创建
+        fruits[0] = "apple";
+        fruits[1] = "banana";
+        fruits[2] = "orange";
+        printArray(fruits);
+        Integer[] ages = {1, 5, 9};//直接根据内容创建
+        printArray(ages);
+
+    }
+
+    /**
+     * 泛型打印数组
+     *
+     * @param a
+     * @param <T>
+     */
+    private static <T> void printArray(T[] a) {
+        for (T element : a) {
+            System.out.printf("%s ", element);
+        }
+        System.out.println();
     }
 
     /**
      * String 测试
      */
     private static void testString() {
-        char[] chars =new char[]{'H','e','l','l','o','W','o','r','l','d'};
+        char[] chars = new char[]{'H', 'e', 'l', 'l', 'o', 'W', 'o', 'r', 'l', 'd'};
         String s = String.copyValueOf(chars);
-        System.out.printf("%s",s);
-        System.out.printf(".indexOf('e')=%d\n",s.indexOf('e'));
+        System.out.printf("%s", s);
+        System.out.printf(".indexOf('e')=%d\n", s.indexOf('e'));
         System.out.println(s.charAt(4));
-        System.out.println(s+".lastIndexOf(\"rl\")="+s.lastIndexOf("rl"));
+        System.out.println(s + ".lastIndexOf(\"rl\")=" + s.lastIndexOf("rl"));
         String car = "豫A9R13C";
         String reg = "^(([京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领][A-Z](([0-9]{5}[DF])|([DF]([A-HJ-NP-Z0-9])[0-9]{4})))|([京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领][A-Z][A-HJ-NP-Z0-9]{4}[A-HJ-NP-Z0-9挂学警港澳使领]))$";
-        System.out.println(car+"是否符合车牌规则=" + car.matches(reg));
-        System.out.println(car+".replaceAll()"+car.replaceFirst("\\d","X"));
+        System.out.println(car + "是否符合车牌规则=" + car.matches(reg));
+        System.out.println(car + ".replaceAll()" + car.replaceFirst("\\d", "X"));
     }
 
     /**
      * Character测试
      */
     private static void testChar() {
-        char  uniChar = '\u039A';
+        char uniChar = '\u039A';
         System.out.println(uniChar);
         Character c = 'A';
-        System.out.println("char("+c+").isUpperCase = "+Character.isUpperCase(c));
+        System.out.println("char(" + c + ").isUpperCase = " + Character.isUpperCase(c));
     }
 
     /**
@@ -43,10 +141,10 @@ public class Main {
      */
     private static void testMath() {
         float b = -13.51f;
-        System.out.println("Math.ceil("+b+")="+ Math.ceil(b));
-        System.out.println("Math.floor("+b+")="+ Math.floor(b));
-        System.out.println("Math.round("+b+")="+ Math.round(b));
-        System.out.println("Math.random()="+ Math.random());
+        System.out.println("Math.ceil(" + b + ")=" + Math.ceil(b));
+        System.out.println("Math.floor(" + b + ")=" + Math.floor(b));
+        System.out.println("Math.round(" + b + ")=" + Math.round(b));
+        System.out.println("Math.random()=" + Math.random());
     }
 
     /**
@@ -54,15 +152,15 @@ public class Main {
      */
     private static void testVolatile() {
         Work work = new Work();
-        for (int i=0;i<100;i++){
-            System.out.println("i="+i);
+        for (int i = 0; i < 100; i++) {
+            System.out.println("i=" + i);
             new Thread(work::run).start();
         }
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
         }
-        System.out.println("运行了"+work.getCount());
+        System.out.println("运行了" + work.getCount());
     }
 
 }
