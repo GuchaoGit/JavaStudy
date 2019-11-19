@@ -2,6 +2,10 @@ import bean.FreshJuice;
 import bean.Work;
 import utils.Util;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -22,8 +26,78 @@ public class Main {
         testDate();
         testRegExp();
         testVarargs();
+//        testBufferedReader();
+        testFile();
+        testFileReader();
 
 //        testVolatile();
+    }
+
+    /**
+     * 读取文件
+     */
+    private static void testFileReader() {
+    /*    File file = new File("E:/JavaStudy/hello.txt");
+        try {
+            FileInputStream is = new FileInputStream(file);
+            InputStreamReader inputStreamReader = new InputStreamReader(is);
+            BufferedReader reader = new BufferedReader(inputStreamReader);
+            StringBuilder sb = new StringBuilder();
+            String line ;
+            while ((line = reader.readLine())!=null){
+                sb.append(line);
+                sb.append("\r\n");
+            }
+            reader.close();
+            inputStreamReader.close();
+            is.close();
+            System.out.println("读取文件："+file.getName());
+            System.out.println(sb.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+        String s = Util.FileUtils.readFile2String("E:/JavaStudy/hello.txt");
+        System.out.println("+++++++++++++++++++文件读取");
+        System.out.println(s);
+    }
+
+    /**
+     * 创建文件并写入内容
+     */
+    private static void testFile() {
+        StringBuilder sb = new StringBuilder();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        File file = new File("E:/JavaStudy/hello.txt");
+        if (!file.exists()) {
+            file.getParentFile().mkdirs();
+            sb.append("first create at ");
+            sb.append(sdf.format(new Date()));
+        } else {
+            sb.append("run at ");
+            sb.append(sdf.format(new Date()));
+        }
+        sb.append("\r\n");
+        Util.FileUtils.writeString2File("E:/JavaStudy/hello.txt", sb.toString(), true);
+    }
+
+    /**
+     * 测试bufferReader
+     */
+    private static void testBufferedReader() {
+        System.out.println("++++++++++++++++++++BufferedReader++++++++++++++++++++++++");
+        char c;
+        // 使用 System.in 创建 BufferedReader
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("输入字符, 按下 'q' 键退出。");
+        // 读取字符
+        try {
+            do {
+                c = (char) br.read();
+                System.out.println(c);
+            } while (c != 'q');
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void testVarargs() {
