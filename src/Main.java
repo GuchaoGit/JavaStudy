@@ -1,5 +1,5 @@
-import bean.FreshJuice;
-import bean.Work;
+import bean.*;
+import exp.IllegalAgeException;
 import utils.Util;
 
 import java.io.BufferedReader;
@@ -29,8 +29,38 @@ public class Main {
 //        testBufferedReader();
         testFile();
         testFileReader();
-
+        testCustomExp();
+        testExtends();
 //        testVolatile();
+    }
+
+    /**
+     * 集成测试
+     */
+    private static void testExtends() {
+        System.out.println("+++++++++++++++++++继承+++++++++++++++++");
+        Dog dog = new Dog("dog", 1);
+        dog.introduction();
+        Cat cat = new Cat("cat", 2);
+        cat.introduction();
+        Mouse mouse = new Mouse("mouse", 3);
+        mouse.introduction();
+        dog.likeEat();
+        cat.likeEat();
+        mouse.likeEat();
+    }
+
+    /**
+     * 测试自定义异常
+     */
+    private static void testCustomExp() {
+        Person person = new Person();
+        person.setName("guc");
+        try {
+            person.setAge(-5);
+        } catch (IllegalAgeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
