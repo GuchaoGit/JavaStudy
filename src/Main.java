@@ -31,7 +31,38 @@ public class Main {
         testFileReader();
         testCustomExp();
         testExtends();
+        testDataStructure();
+        testGenericType();
+        testSerializable();
 //        testVolatile();
+    }
+
+    /**
+     * 序列化测试
+     */
+    private static void testSerializable() {
+        System.out.println("+++++++++++++++++++序列化+++++++++++++++++");
+        SerializableTest serializableTest = new SerializableTest();
+        serializableTest.test();
+    }
+
+    /**
+     * 泛型测试
+     */
+    private static void testGenericType() {
+        System.out.println("+++++++++++++++++++泛型方法+++++++++++++++++");
+        GenericType genericType = new GenericType("GenericType", new Cat("cat", 5));
+        genericType.test();
+    }
+
+
+    /**
+     * 数据结构
+     */
+    private static void testDataStructure() {
+        System.out.println("+++++++++++++++++++数据结构+++++++++++++++++");
+        DataStructure dataStructure = new DataStructure();
+        dataStructure.test();
     }
 
     /**

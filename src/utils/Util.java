@@ -1,6 +1,10 @@
 package utils;
 
+import bean.MyObjectOutputStream;
+
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Author guc
@@ -76,6 +80,70 @@ public class Util {
                 OutputStreamWriter writer = new OutputStreamWriter(fop);//new OutputStreamWriter(fop, "UTF-8"); 指定编码，Windows默认gbk
                 writer.append(content);
                 writer.close();
+                fop.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+                success = false;
+            }
+            return success;
+        }
+
+        /**
+         * 从文件中读取对象
+         *
+         * @param filePath
+         * @param <T>
+         * @return
+         */
+        public static <T> List<T> readFile2Object(String filePath) {
+            List<T> datas = new ArrayList<>();
+            File file = new File(filePath);
+            try {
+                FileInputStream fis = new FileInputStream(file);
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                T obj;
+                while ((obj = (T) ois.readObject()) != null) {
+                    datas.add(obj);
+                }
+                ois.close();
+                fis.close();
+            } catch (IOException e) {
+                if (e instanceof EOFException) {
+                    System.out.println("对象读取完毕");
+                } else {
+                    e.printStackTrace();
+                }
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            return datas;
+        }
+
+        /**
+         * 将对象写入文件
+         *
+         * @param filePath 文件路径
+         * @param obj      对象
+         * @param append   是否拼接
+         * @param <T>
+         * @return
+         */
+        public static <T> boolean writeObject2File(String filePath, T obj, boolean append) {
+            boolean success = true;
+            File file = new File(filePath);
+            if (!file.exists()) {
+                file.getParentFile().mkdirs();
+            }
+            try {
+                FileOutputStream fop = new FileOutputStream(file, append);//拼接
+                ObjectOutputStream oos;
+                if (append && file.length() > 0) {//追加 且已存有对象
+                    oos = new MyObjectOutputStream(fop);
+                } else {
+                    oos = new ObjectOutputStream(fop);
+                }
+                oos.writeObject(obj);
+                oos.close();
                 fop.close();
             } catch (IOException e) {
                 e.printStackTrace();
