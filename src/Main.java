@@ -1,5 +1,6 @@
 import bean.*;
 import exp.IllegalAgeException;
+import net.Server;
 import utils.Util;
 
 import java.io.BufferedReader;
@@ -26,7 +27,6 @@ public class Main {
         testDate();
         testRegExp();
         testVarargs();
-//        testBufferedReader();
         testFile();
         testFileReader();
         testCustomExp();
@@ -35,6 +35,20 @@ public class Main {
         testGenericType();
         testSerializable();
 //        testVolatile();
+        testBufferedReader();
+    }
+
+    /**
+     * 网络编程
+     */
+    private static void testSocket() {
+        System.out.println("+++++++++++++++++++SocketServer+++++++++++++++++");
+        Server server = Server.getInstance();
+        try {
+            server.run();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -150,11 +164,16 @@ public class Main {
         // 使用 System.in 创建 BufferedReader
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("输入字符, 按下 'q' 键退出。");
+        System.out.println("输入字符, 按下 's' 键启动SocketServer。");
         // 读取字符
         try {
             do {
                 c = (char) br.read();
                 System.out.println(c);
+                if ('s' == c) {
+                    testSocket();
+                    break;
+                }
             } while (c != 'q');
         } catch (IOException e) {
             e.printStackTrace();
