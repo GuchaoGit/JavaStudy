@@ -35,7 +35,19 @@ public class Main {
         testGenericType();
         testSerializable();
 //        testVolatile();
-        testBufferedReader();
+        testMultiThread();
+//        testBufferedReader();
+    }
+
+    /**
+     * 多线程编程
+     */
+    private static void testMultiThread() {
+        System.out.println("+++++++++++++++++++多线程编程+++++++++++++++++");
+        System.out.println("Main:" + Thread.currentThread());
+        MultiThread thread = new MultiThread();
+        thread.test();
+        System.out.println("after in MainThread ------------------");
     }
 
     /**

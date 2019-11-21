@@ -126,4 +126,20 @@ Overload 重载 同方法名，不同参数
  * 类型通配符 ?
 ### 序列化
 ### 网络编程
+### URL处理
+```
+protocol://host:port/path?query#fragment
 
+eg:http://www.runoob.com/index.html?language=cn#j2se
+```
+ * 协议为(protocol)：http
+ * 主机为(host:port)：www.runoob.com
+ * 端口号为(port): 80 ，以上URL实例并未指定端口，因为 HTTP 协议默认的端口号为 80。
+ * 文件路径为(path)：/index.html
+ * 请求参数(query)：language=cn
+ * 定位位置(fragment)：j2se，定位到网页中 id 属性为 j2se 的 HTML 元素位置 。
+
+### 多线程编程
+ * 通过实现 Runnable 接口
+ * 通过继承 Thread 类本身
+ * 通过 Callable 和 Future 创建线程
