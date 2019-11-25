@@ -37,6 +37,16 @@ public class Main {
 //        testVolatile();
         testMultiThread();
 //        testBufferedReader();
+        testGraph();
+    }
+
+    /**
+     * 绘制图形
+     */
+    private static void testGraph() {
+        System.out.println("+++++++++++++++++++绘制图形+++++++++++++++++");
+        DrawGraph drawGraph = new DrawGraph();
+        drawGraph.test();
     }
 
     /**
@@ -257,23 +267,12 @@ public class Main {
         fruits[0] = "apple";
         fruits[1] = "banana";
         fruits[2] = "orange";
-        printArray(fruits);
+        Util.printArray(fruits);
         Integer[] ages = {1, 5, 9};//直接根据内容创建
-        printArray(ages);
+        Util.printArray(ages);
+        ArrayTest test = new ArrayTest();
+        test.test();
 
-    }
-
-    /**
-     * 泛型打印数组
-     *
-     * @param a
-     * @param <T>
-     */
-    private static <T> void printArray(T[] a) {
-        for (T element : a) {
-            System.out.printf("%s ", element);
-        }
-        System.out.println();
     }
 
     /**

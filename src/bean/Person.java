@@ -30,6 +30,12 @@ public class Person implements Serializable {
         return age;
     }
 
+    /**
+     * 设置年龄
+     *
+     * @param age 年龄
+     * @throws IllegalAgeException
+     */
     public void setAge(int age) throws IllegalAgeException {
         if (age < 0 || age > 200) throw new IllegalAgeException(age);
         this.age = age;

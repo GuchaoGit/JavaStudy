@@ -4,6 +4,7 @@ import bean.MyObjectOutputStream;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -29,6 +30,20 @@ public class Util {
             }
         }
         return max;
+    }
+
+    /**
+     * 泛型打印数组
+     *
+     * @param a
+     * @param <T>
+     */
+    public static <T> void printArray(T[] a) {
+        System.out.println(Arrays.toString(a));
+       /* for (T element : a) {
+            System.out.printf("%s ", element);
+        }
+        System.out.println();*/
     }
 
     public static class FileUtils {
