@@ -143,3 +143,15 @@ eg:http://www.runoob.com/index.html?language=cn#j2se
  * 通过实现 Runnable 接口
  * 通过继承 Thread 类本身
  * 通过 Callable 和 Future 创建线程
+ 
+## Java 8 新特性
+* Lambda表达式
+* 方法引用
+* 函数式接口
+* 接口的默认方法
+* Stream 数据处理
+* Optional 类 一个可以为null的容器对象
+* 新的日期类
+* Base64
+## Java连接MySQL数据库
+

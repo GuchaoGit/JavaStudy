@@ -8,11 +8,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class Main {
     private static boolean ready;
@@ -38,6 +37,38 @@ public class Main {
         testMultiThread();
 //        testBufferedReader();
         testGraph();
+        testLambda();
+        testStream();
+        testOptional();
+    }
+
+    private static void testOptional() {
+        OptionalTest test = new OptionalTest();
+        test.test();
+    }
+
+    private static void testStream() {
+        StreamTest test = new StreamTest();
+        test.test();
+    }
+
+    private static void testLambda() {
+        ITest iTest = () -> {
+            System.out.println("+++++++++++++++++++Lambda表达式+++++++++++++++++");
+            System.out.println("表达式中打印");
+            System.out.println("+++++++++++++++++++方法引用+++++++++++++++++");
+            List<String> names = new ArrayList();
+            names.add("Google");
+            names.add("Baidu");
+            names.add("Sina");
+            names.forEach(System.out::println);//方法引用
+            List<String> filtered = names.stream().filter(str -> str.startsWith("B")).collect(Collectors.toList());
+            filtered.forEach(System.out::println);
+        };
+        iTest.test();
+        iTest.print();
+        ITest.printStatic();
+
     }
 
     /**
