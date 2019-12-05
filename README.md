@@ -146,7 +146,7 @@ eg:http://www.runoob.com/index.html?language=cn#j2se
  
 ## Java 8 新特性
 * Lambda表达式
-* 方法引用
+* 方法引用  ::
 * 函数式接口
 * 接口的默认方法
 * Stream 数据处理
