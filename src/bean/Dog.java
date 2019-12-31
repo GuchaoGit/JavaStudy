@@ -21,4 +21,16 @@ public class Dog extends Animal {
         super.likeEat();
         System.out.println(name + "喜欢吃骨头");
     }
+
+    /**
+     * 重载  没对返回值有要求
+     * 可修改返回值类型
+     *
+     * @param i
+     * @return
+     */
+    public int likeEat(int i) {
+
+        return i;
+    }
 }

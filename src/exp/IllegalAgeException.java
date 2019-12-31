@@ -21,3 +21,14 @@ public class IllegalAgeException extends Exception {
         return getAge() + "年龄不合法";
     }
 }
+
+/**
+ * 可以包含多个类，但public一定只能有一个且与源文件名相同
+ */
+class CustomException extends Exception {
+
+    @Override
+    public String getMessage() {
+        return super.getMessage();
+    }
+}

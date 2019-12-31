@@ -167,4 +167,15 @@ public class Util {
             return success;
         }
     }
+
+    /**
+     * @param originStr 字符串
+     * @return 反转
+     */
+    public static String reverse(String originStr) {
+        if (originStr == null || originStr.length() <= 1)
+            return originStr;
+        System.out.println(originStr);
+        return reverse(originStr.substring(1)) + originStr.charAt(0);
+    }
 }
