@@ -13,6 +13,10 @@ import java.util.List;
  * @Description TODO
  */
 public class Util {
+
+    private Util() {
+        throw new AssertionError();
+    }
     /**
      * typeName... parameterName 可变参数
      *
@@ -177,5 +181,54 @@ public class Util {
             return originStr;
         System.out.println(originStr);
         return reverse(originStr.substring(1)) + originStr.charAt(0);
+    }
+
+    /**
+     * 统计文件中 某个字符串出现的次数
+     *
+     * @param fileName 文件
+     * @param word     字符串
+     * @return 字符串在文件中出现的次数
+     */
+    public static int countWordInFile(String fileName, String word) {
+        int counter = 0;
+        try (FileReader fr = new FileReader(fileName)) {
+            try (BufferedReader br = new BufferedReader(fr)) {
+                String line = null;
+                while ((line = br.readLine()) != null) {
+                    int index = -1;
+                    while (line.length() >= word.length() && (index = line.indexOf(word)) >= 0) {
+                        counter++;
+                        line = line.substring(index, word.length());
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return counter;
+    }
+
+    /**
+     * 展示目录中文件
+     *
+     * @param f
+     */
+    public static void showDirectory(File f) {
+        _walkDirectory(f, 0);
+    }
+
+    private static void _walkDirectory(File f, int level) {
+        if (f.isDirectory()) {
+            System.out.println(f.getAbsolutePath());
+            for (File temp : f.listFiles()) {
+                _walkDirectory(temp, level + 1);
+            }
+        } else {
+            for (int i = 0; i < level - 1; i++) {
+                System.out.print("\t");
+            }
+            System.out.println(f.getName());
+        }
     }
 }

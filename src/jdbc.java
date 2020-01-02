@@ -21,11 +21,13 @@ public class jdbc {
             // 打开链接
             System.out.println("连接数据库...");
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            // 执行查询
+            // 创建语句
             System.out.println(" 实例化Statement对象...");
             stmt = conn.createStatement();
             String sql = "select * from websites";
+            // 执行查询
             ResultSet rs = stmt.executeQuery(sql);
+            //处理结果
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
