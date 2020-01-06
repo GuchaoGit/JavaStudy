@@ -1,6 +1,5 @@
-import utils.Util;
-
-import java.io.File;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @Author guc
@@ -11,7 +10,18 @@ public class ThreadPoolTest {
     public static void main(String[] args) {
 //      ThreadPool threadPool = new ThreadPool();
 //        threadPool.test();
-        Util.showDirectory(new File("E:/My项目资料"));
+//        Util.showDirectory(new File("E:/My项目资料"));
+        testReg();
+    }
+
+    private static void testReg() {
+        String str = "北京市(朝阳区)(西城区)(海淀区)";
+        Pattern p = Pattern.compile(".*?(?=\\()");
+        Matcher m = p.matcher(str);
+        if (m.find()) {
+            System.out.println(m.group());
+        }
+
     }
 
 }
