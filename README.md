@@ -155,3 +155,10 @@ eg:http://www.runoob.com/index.html?language=cn#j2se
 * Base64
 ## Java连接MySQL数据库
 
+## 注解
+* java注解是附加在代码中的一些元信息，用于一些工具在编译、运行时进行解析和使用，起到说明、配置的功能。
+* 注解不会也不能影响代码的实际逻辑，仅仅起到辅助性的作用。包含在 java.lang.annotation 包中。
+* java自定义注解和运行时靠反射获取注解。  
+
+
+
