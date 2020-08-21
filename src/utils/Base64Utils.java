@@ -17,8 +17,8 @@ public class Base64Utils {
     public static String picture2Base64(String path) {
         File file = new File(path);
         String base64 = "";
-        FileInputStream inputStream;
-        ByteArrayOutputStream out;
+        FileInputStream inputStream = null;
+        ByteArrayOutputStream out = null;
         try {
             inputStream = new FileInputStream(file);
             out = new ByteArrayOutputStream();
@@ -30,11 +30,24 @@ public class Base64Utils {
             byte[] pics = out.toByteArray();
             base64 = Base64.getEncoder().encodeToString(pics);
             out.flush();
-            out.close();
-            inputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
             return "FileNotFoundException";
+        } finally {
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (inputStream != null) {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return base64;
     }
@@ -46,7 +59,7 @@ public class Base64Utils {
      */
     public static File base642Picture(String base64, String filePath) {
         File file = new File(filePath);
-        FileOutputStream out;
+        FileOutputStream out = null;
         try {
             file.getParentFile().mkdirs();
             file.createNewFile();
@@ -58,6 +71,14 @@ public class Base64Utils {
         } catch (IOException e) {
             e.printStackTrace();
             return null;
+        } finally {
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return file;
     }
